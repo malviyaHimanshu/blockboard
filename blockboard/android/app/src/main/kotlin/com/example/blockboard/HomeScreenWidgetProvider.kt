@@ -1,4 +1,4 @@
-package com.flutterjunction.blockboard  // your package name
+package com.example.blockboard  // your package name
 
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -21,7 +21,7 @@ class HomeScreenWidgetProvider : HomeWidgetProvider() {
 
                 val counter = widgetData.getInt("_counter", 0)
 
-                var counterText = "Your counter value is: $counter"
+                var counterText = "$counter"
 
                 if (counter == 0) {
                     counterText = "You have not pressed the counter button"
