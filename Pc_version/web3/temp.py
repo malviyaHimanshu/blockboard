@@ -9,39 +9,24 @@ clipboard_data = pyperclip.paste()
 # Loop forever
 while True:
     # Check if the clipboard data has changed
-    win32clipboard.OpenClipboard()
-    new_clipboard_data = win32clipboard.GetClipboardData()
-    win32clipboard.CloseClipboard()
-
-    if new_clipboard_data != clipboard_data:
+    new_clipboard_data = pyperclip.paste()
+    result = subprocess.run(["node", "main.js"],capture_output=True, text=True)
+    print("prev= ",clipboard_data," present= ",new_clipboard_data," result: ",result.stdout.split('\n')[0])
+   # when prev!= present
+    if new_clipboard_data != clipboard_data: 
+        print("updating blockchain")
         clipboard_data = new_clipboard_data
-        # print(clipboard_data)
-        # Execute the "node main.js" command and capture output
         text1 = clipboard_data
         result = subprocess.run(["node", "main.js", f"--text={text1}".format(text1=clipboard_data)],
                                 capture_output=True, text=True)
-        # result = subprocess.run(["node", "main.js"], capture_output=True, text=True)
-        print("waiting for node to complete")
-        print(result.stdout)
-        print("done waiting for node to complete")
-
-    # Open the file and read its contents
-    with open("clipboard_content.txt", "r") as file:
-        # Assign the first line of the file to the clipboard_data variable
-        block = file.readline().strip()
-    # Print the contents of the clipboard_data variable to verify the script worked
-    print("content : ",block)
-
-    if block != clipboard_data:
-        print("getting data from block chain")
-        result = subprocess.run(["node", "main.js"],capture_output=True, text=True)
-        print("recieved : ",result.stdout)
-        print("copying the block data to clipboard")
-        pyperclip.copy(result.stdout.split('\n')[0])
-        # print(pyperclip.paste())
-        # print(block)
-    # Copy the contents of the clipboard_data variable to the clipboard
-    # if pyperclip.paste() != clipboard_data:
-    #     pyperclip.copy(result.stdout)
-    # Wait for a short period of time before checking the clipboard again
-    time.sleep(1)
+        while True:
+            result = subprocess.run(["node", "main.js"],capture_output=True, text=True)
+            print(result)
+            print("Loading...")
+            if(result.stdout.split("\n")[0] == new_clipboard_data):
+                 break
+    #when (prev==present)!= result
+    elif( clipboard_data == new_clipboard_data and clipboard_data != result.stdout.split('\n')[0]):
+            pyperclip.copy(result.stdout.split('\n')[0])
+            clipboard_data=result.stdout
+            print("updated clipboard to ",result.stdout)
