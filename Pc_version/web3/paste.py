@@ -9,7 +9,7 @@ def execute_command(command):
         command (str): The command to execute.
 
     Returns:
-        str: The output of the command.
+        str: The output of the command.m
     """
     process = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True)
     output, error = process.communicate()

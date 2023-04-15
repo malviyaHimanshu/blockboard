@@ -4,6 +4,19 @@ import fs from 'fs'
 import { spawn } from 'child_process'
 import fetch from 'node-fetch';
 import { Headers } from 'node-fetch';
+async function getClipboardContent(latestCID) {
+  try {
+    const link= `https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`
+    const response = await fetch(`https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`);
+    const data = await response.text();
+    console.log( data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching clipboard content:', error);
+    return null;
+  }
+}
+
 
 async function getLatestTextFile(token) {
   const headers = new Headers()
@@ -15,16 +28,21 @@ async function getLatestTextFile(token) {
     headers: headers
   })
   const json = await response.json()
+
 //   console.log(json)
   const latestFile = json[0]
 
   const latestCID=latestFile.cid
-  // Fetch the latest car file from Web3 Storage
-  const re = await fetch(`https://dweb.link/ipfs/${latestCID}/clipboard_content.txt`)
-  // Read the response body as text
-  const text1 = await re.text()
-  // Print the text to the console
-  console.log(text1)
+  getClipboardContent(latestCID)
+  // // Fetch the latest car file from Web3 Storage
+  // const re = await fetch(`https://dweb.link/ipfs/${latestCID}/clipboard_content.txt`)
+  // console.log(re)
+  // // Read the response body as text
+  // const text1 = await re.text()
+  // console.log("____________")
+  // // Print the text to the console
+  // console.log(text1)
+  
 
 }
 

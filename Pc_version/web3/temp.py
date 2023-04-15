@@ -30,18 +30,18 @@ while True:
         # Assign the first line of the file to the clipboard_data variable
         block = file.readline().strip()
     # Print the contents of the clipboard_data variable to verify the script worked
-    print(block)
+    print("content : ",block)
 
     if block != clipboard_data:
-        print("copying the block data to clipboard")
+        print("getting data from block chain")
         result = subprocess.run(["node", "main.js"],capture_output=True, text=True)
-        print(result.stdout)
+        print("recieved : ",result.stdout)
         print("copying the block data to clipboard")
-        pyperclip.copy(result.stdout)
+        pyperclip.copy(result.stdout.split('\n')[0])
         # print(pyperclip.paste())
         # print(block)
     # Copy the contents of the clipboard_data variable to the clipboard
     # if pyperclip.paste() != clipboard_data:
     #     pyperclip.copy(result.stdout)
     # Wait for a short period of time before checking the clipboard again
-    time.sleep(3)
+    time.sleep(1)
