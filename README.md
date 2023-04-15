@@ -1,2 +1,10 @@
-# blockboard
-submission for hackverse(tamil nade ) hackathon
+# BlockBoard
+Submission for Hackverse(Tamil Nadu) Hackathon
+
+
+
+## Contributors
+Jashwanth Peddisetty
+Himanshu Malviya
+Madati Sasank
+Sravanth Chowdary Potluri
