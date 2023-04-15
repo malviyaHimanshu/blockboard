@@ -1,11 +1,11 @@
 import process from 'process'
 import minimist from 'minimist'
 import { Web3Storage, getFilesFromPath } from 'web3.storage'
+const TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2M2U4ZkMzNTFkNGQ0MUE4NWNFYUUyM2REMUQzNmFFODZDZEVlOGUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NDEyMjE5NjEsIm5hbWUiOiJibG9ja2JvYXJkIn0.Mpwk3LiVhQrztvHeYTy3dKyVscMU_AbpwbZ47fLNKX4'
 
 async function main () {
   const args = minimist(process.argv.slice(2))
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2M2U4ZkMzNTFkNGQ0MUE4NWNFYUUyM2REMUQzNmFFODZDZEVlOGUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NDEyMjE5NjEsIm5hbWUiOiJibG9ja2JvYXJkIn0.Mpwk3LiVhQrztvHeYTy3dKyVscMU_AbpwbZ47fLNKX4'
-
+  const token = TOKEN
   if (!token) {
     return console.error('A token is needed. You can create one on https://web3.storage')
   }

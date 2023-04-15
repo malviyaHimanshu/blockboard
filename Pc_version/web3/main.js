@@ -4,6 +4,7 @@ import fs from 'fs'
 import { spawn } from 'child_process'
 import fetch from 'node-fetch';
 import { Headers } from 'node-fetch';
+const TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2M2U4ZkMzNTFkNGQ0MUE4NWNFYUUyM2REMUQzNmFFODZDZEVlOGUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NDEyMjE5NjEsIm5hbWUiOiJibG9ja2JvYXJkIn0.Mpwk3LiVhQrztvHeYTy3dKyVscMU_AbpwbZ47fLNKX4'
 async function getClipboardContent(latestCID) {
   try {
     const link= `https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`
@@ -94,8 +95,7 @@ async function main() {
   }
   else{
     // console.log("fetching is yet to be done")
-    getLatestTextFile('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2M2U4ZkMzNTFkNGQ0MUE4NWNFYUUyM2REMUQzNmFFODZDZEVlOGUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NDEyMjE5NjEsIm5hbWUiOiJibG9ja2JvYXJkIn0.Mpwk3LiVhQrztvHeYTy3dKyVscMU_AbpwbZ47fLNKX4'
-)
+    getLatestTextFile(TOKEN)
   }
 }
 

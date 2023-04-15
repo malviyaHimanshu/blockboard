@@ -1,5 +1,4 @@
 import pyperclip
-import win32clipboard
 import time
 import subprocess
 import os
