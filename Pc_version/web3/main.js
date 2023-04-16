@@ -1,22 +1,34 @@
 import process from 'process'
 import minimist from 'minimist'
 import fs from 'fs'
+import open from 'open';
 import { spawn } from 'child_process'
 import fetch from 'node-fetch';
 import { Headers } from 'node-fetch';
 const TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDc2M2U4ZkMzNTFkNGQ0MUE4NWNFYUUyM2REMUQzNmFFODZDZEVlOGUiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2ODE1NDEyMjE5NjEsIm5hbWUiOiJibG9ja2JvYXJkIn0.Mpwk3LiVhQrztvHeYTy3dKyVscMU_AbpwbZ47fLNKX4'
 async function getClipboardContent(latestCID) {
+  console.log("latest cid is : ",latestCID)
   try {
-    const link= `https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`
-    const response = await fetch(`https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`);
-    const data = await response.text();
-    console.log( data);
-    return data;
+    const clipboardUrl = `https://${latestCID}.ipfs.dweb.link/clipboard_content.txt`;
+    const noBgUrl = `https://${latestCID}.ipfs.dweb.link/no-bg.png`;
+
+    // Fetch clipboard content
+    const clipboardResponse = await fetch(clipboardUrl);
+    const clipboardData = await clipboardResponse.text();
+    if(clipboardData.split(" ")[0]=="failed"){
+      open(noBgUrl);
+      console.log("image123")
+    }
+    else{
+      console.log(clipboardData)
+    }
+    return clipboardData;
   } catch (error) {
     console.error('Error fetching clipboard content:', error);
     return null;
   }
 }
+
 
 
 async function getLatestTextFile(token) {
@@ -29,21 +41,13 @@ async function getLatestTextFile(token) {
     headers: headers
   })
   const json = await response.json()
-
-//   console.log(json)
+  
+  console.log(json)
   const latestFile = json[0]
 
   const latestCID=latestFile.cid
   getClipboardContent(latestCID)
-  // // Fetch the latest car file from Web3 Storage
-  // const re = await fetch(`https://dweb.link/ipfs/${latestCID}/clipboard_content.txt`)
-  // console.log(re)
-  // // Read the response body as text
-  // const text1 = await re.text()
-  // console.log("____________")
-  // // Print the text to the console
-  // console.log(text1)
-  
+
 
 }
 
