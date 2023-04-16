@@ -22,3 +22,8 @@ visit [web3storage](https://web3.storage/login/) and login to create custom API 
 ```
 const TOKEN=<YOUR TOKEN>
 ```
+# How to run
+Just open the temp1.py file and you are ready for seamless transfer between devices
+```
+python Pc_version/web3/temp1.py
+```
